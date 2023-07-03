@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>스와이퍼 플러그인 구현하기 (Infinite loop)</title>
+
+	<link rel="stylesheet" href="../resources/scss/css/jqueryPlugin.css">
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+	<script src="../resources/js/jquery-3.6.0.min.js"></script>
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			var swiper = new Swiper(".mySwiper", {
+			slidesPerView: 1,      // 하나의 슬라이드에 보여줄 갯수
+			spaceBetween: 30,      // 슬라이드 사이 여백
+			loop: true,            // 슬라이드 반복 여부
+			pagination: {          // 페이지네이션 호출 여부
+				el: ".swiper-pagination", // 클래스 지정
+				clickable: true,          // 버튼 클릭 여부
+			},
+			navigation: {          // < > 버튼 지정
+				nextEl: ".swiper-button-next", // > 클래스 지정
+				prevEl: ".swiper-button-prev", // < 클래스 지정
+			},
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<div class="conTitle">
+		<h1>스와이퍼 플러그인 구현하기 (Infinite loop)</h1>
+	</div>
+	<div class="conBody">
+		<!-- 설명 -->
+		<!-- <div class="guide">
+			<h2 class="title">설명</h2>
+			<div class="textBox"></div>
+		</div> -->
+
+		<!-- 미리보기 -->
+		<div class="swiperContentBox">
+			<!-- <h2 class="title">미리보기</h2> -->
+
+			<div class="container">
+				<div class="swiper mySwiper">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide bg1">Slide 1</div>
+						<div class="swiper-slide bg2">Slide 2</div>
+						<div class="swiper-slide bg3">Slide 3</div>
+					</div>
+					<div class="swiper-button-next"></div>
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-pagination"></div>
+				</div> 
+			</div> 
+		</div>
+	</div>
+</body>
+
+</html>

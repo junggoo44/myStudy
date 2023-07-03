@@ -1,0 +1,321 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  color: black;
+  vertical-align: baseline;
+}
+
+body {
+  min-width: 600px;
+}
+
+body .conTitle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  min-width: 500px;
+  padding: 5px;
+  background: #fff;
+}
+
+body .conTitle .linkBtn {
+  display: inline-block;
+  margin-right: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: #313131;
+  color: white;
+}
+
+body .conBody {
+  position: relative;
+  top: 55px;
+  left: 0;
+  padding: 0 10px 10px;
+}
+
+body .conBody .title {
+  margin: 20px 0 5px;
+  font-size: 20px;
+}
+
+body .conBody .subTitle {
+  margin: 20px 0 5px;
+  font-size: 18px;
+}
+
+body .conBody .guide .textBox {
+  height: 200px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: lightgoldenrodyellow;
+  padding: 20px;
+}
+
+.srOnly {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  font-size: 1px;
+  color: transparent;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.conBody .contentBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.conBody .contentBox > div + div {
+  margin-left: 10px;
+}
+
+.conBody .contentBox > div .examples {
+  width: 510px;
+  height: 370px;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.conBody .contentBox > div .examples:first-child {
+  margin-right: 10px;
+}
+
+.conBody .contentBox > div .examples .containerA .tooltipWrap {
+  display: inline-block;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.conBody .contentBox > div .examples .containerA .tooltipWrap .tooltipBtnA {
+  display: inline-block;
+  padding: 3px 5px;
+  border-radius: 5px;
+  background: #313131;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  line-height: 15px;
+}
+
+.conBody .contentBox > div .examples .containerA .tooltipWrap .tooltipA {
+  display: inline-block;
+  display: none;
+  position: absolute;
+  top: 25px;
+  left: 0;
+  width: 150px;
+  padding: 10px;
+  border-radius: 7px;
+  background: lightblue;
+  -webkit-box-shadow: 1px 6px 18px 0px #545454;
+          box-shadow: 1px 6px 18px 0px #545454;
+}
+
+.conBody .contentBox > div .examples .containerA .tooltipWrap .tooltipA .closeBtn {
+  display: inline-block;
+  position: absolute;
+  top: 6px;
+  right: 3px;
+  width: 30px;
+  height: 30px;
+  background: none;
+  cursor: pointer;
+}
+
+.conBody .contentBox > div .examples .containerB {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.conBody .contentBox > div .examples .containerB .tooltipBtnB {
+  display: inline-block;
+  position: relative;
+  top: 0;
+  left: 0;
+  padding: 3px 5px;
+  border-radius: 5px;
+  background: #313131;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  line-height: 15px;
+}
+
+.conBody .contentBox > div .examples .containerB .tooltipB {
+  display: none;
+  position: absolute;
+  width: 100%;
+  padding: 10px;
+  border-radius: 7px;
+  background: lightblue;
+  -webkit-box-shadow: 1px 6px 18px 0px #545454;
+          box-shadow: 1px 6px 18px 0px #545454;
+}
+
+.conBody .contentBox > div .examples .containerB .tooltipB .closeBtnB {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background: none;
+  cursor: pointer;
+}
+
+.conBody.p_0 {
+  padding: 0;
+}
+
+.backContent {
+  width: 100vw;
+  height: calc(100vh - 55px);
+}
+
+.backContent .popOpen {
+  margin: 10px 0 10px 5px;
+  padding: 10px 20px;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  background: #fff;
+  color: #aaa;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.layerPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.layerPopup.hide {
+  display: none;
+}
+
+.layerPopup .dimed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.layerPopup .popupInner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  height: 100vh;
+}
+
+.layerPopup .popupInner > .popupCon {
+  position: relative;
+  z-index: 1500px;
+  overflow: hidden;
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.layerPopup .popupInner > .popupCon .popupHeader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 50px;
+  padding: 0 40px;
+}
+
+.layerPopup .popupInner > .popupCon .popupHeader .popupTit {
+  width: 100%;
+  font-size: 16px;
+  text-align: center;
+}
+
+.layerPopup .popupInner > .popupCon .popupBody {
+  max-height: calc(100vh - 200px);
+  padding: 10px 20px 30px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.layerPopup .popupInner > .popupCon .popupBody .container {
+  height: 200px;
+}
+
+.layerPopup .popupInner > .popupCon .popupFooter {
+  position: relative;
+  height: 50px;
+  border-radius: 0 0 10px 10px;
+}
+
+.layerPopup .popupInner > .popupCon .popupFooter .btnGroupFlex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.layerPopup .popupInner > .popupCon .popupFooter .btnGroupFlex .btn {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.layerPopup .popupInner > .popupCon .popupFooter .btnGroupFlex .btn.bgGray {
+  background: #ddd;
+}
+
+.layerPopup .popupInner > .popupCon .popupFooter .btnGroupFlex .btn.bgBlue {
+  background: lightblue;
+}
+
+.layerPopup .popupInner button.closeBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 50px;
+  background: none;
+  font-size: 18px;
+  cursor: pointer;
+}

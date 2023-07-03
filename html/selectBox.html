@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>셀렉트박스 구현하기</title>
+
+	<link rel="stylesheet" href="../resources/scss/css/form.css">
+	<script src="../resources/js/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('.selectCustom .selTitle').on('click', function () {
+				var idx = $(this).closest('.selectCustom');
+				if (!idx.hasClass('show')) {
+					$(idx).addClass('show');
+					$(this).attr('title', '브랜드 선택 접기');
+				} else {
+					$(idx).removeClass('show');
+					$(this).attr('title', '브랜드 선택 펼치기');
+				}
+			});
+
+			$('.selContent li a').on('click', function () {	
+				var selTit = $('.selTitle > span');  // 타이틀 영역
+				var selOpt = $(this).text();  // 클릭한 텍스트
+				var titBox = $(this).closest('.selectCustom');  // 클릭한 최상위 박스
+				var selBox = $(titBox).find(selTit);  // 클릭한 최상위 박스의 타이틀 영역 
+				selBox.text(selOpt);
+				$('.selectCustom').removeClass('show');
+				$('.selTitle').attr('title', '브랜드 선택 펼치기');
+				$(titBox).find('.selTitle').focus();
+			});
+
+			// 접근성 포커싱 유지
+			$(document).on('keydown', '.selContent li:last-child a', function (e) {
+				if (e.keyCode == 9 && !e.shiftKey) { // tab키를 누르거나 shift키를 누르지 않았거나
+					e.preventDefault();
+					$(".selContent li:first-child a").focus();
+				}
+			}).on('keydown', '.selContent li:first-child a', function (e) {
+				if ($(this).is(e.target) && e.keyCode == 9 && e.shiftKey) {
+					e.preventDefault();
+					$(".selContent li:last-child a").focus();
+				}
+			});
+
+			// 외부영역 클릭 시 팝업 닫기
+			$(document).mouseup(function (e) {
+				e.preventDefault();
+				var selectCustom = $(".selectCustom");
+				if (selectCustom.has(e.target).length == 0) {
+					selectCustom.removeClass("show");			
+					$('.selTitle').attr('title', '브랜드 선택 펼치기');
+				};
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<div class="conTitle">
+		<h1>셀렉트 박스 구현하기</h1>
+	</div>
+	<div class="conBody">
+		<!-- 설명 -->
+		<!-- <div class="guide">
+			<h2 class="title">설명</h2>
+			<div class="textBox"></div>
+		</div> -->
+
+		<!-- 미리보기 -->
+		<div class="contentBox">
+			<!-- <h2 class="title">미리보기</h2> -->
+
+			<!-- 기본 -->
+			<h2 class="title">기본 select+option</h2>
+			<div class="examples">
+				<select name="food" id="" class="selectDefult">
+					<option value="">선택</option>
+					<option value="sweetPotato">고구마</option>
+					<option value="pizza">피자</option>
+					<option value="yogurt">요거트</option>
+				</select>
+				<select name="food" id="" class="selectDefult" disabled>
+					<option value="">비활성화 disabled</option>
+					<option value="sweetPotato">고구마</option>
+					<option value="pizza">피자</option>
+					<option value="yogurt">요거트</option>
+				</select>
+				<div class="arrowCustom">
+					<select name="food" id="">
+						<option value="">화살표만 커스텀</option>
+						<option value="sweetPotato">고구마</option>
+						<option value="pizza">피자</option>
+						<option value="yogurt">요거트</option>
+					</select>
+					<span class="icoArrow"><img src="../resources/image/content/ico_arrow_down_whtie.png" alt=""></span>
+				</div>
+			</div>
+
+			<!-- 커스텀 -->
+			<h2 class="title">커스텀 셀렉트박스 dl>dt+dd</h2>
+			<div class="examples">
+				<div class="selectCustom">
+					<dl>
+						<dt><a href="#;" title="브랜드 선택" class="selTitle"><span>브랜드 선택</span></a></dt>
+						<dd>
+							<ul class="selContent">
+								<li><a href="#;"><span>나이키</span></a></li>
+								<li><a href="#;"><span>언더아머</span></a></li>
+								<li><a href="#;"><span>입생로랑</span></a></li>
+								<li><a href="#;"><span>셀린느</span></a></li>
+								<li><a href="#;"><span>노스페이스</span></a></li>
+							</ul>
+						</dd>
+					</dl>
+				</div>
+				<div class="selectCustom">
+					<dl>
+						<dt><a href="#;" title="브랜드 선택" class="selTitle"><span>브랜드 선택</span></a></dt>
+						<dd>
+							<ul class="selContent">
+								<li><a href="#;"><span>나이키</span></a></li>
+								<li><a href="#;"><span>언더아머</span></a></li>
+								<li><a href="#;"><span>입생로랑</span></a></li>
+								<li><a href="#;"><span>셀린느</span></a></li>
+								<li><a href="#;"><span>노스페이스</span></a></li>
+							</ul>
+						</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>아코디언 목록 구현하기</title>
+
+	<link rel="stylesheet" href="../resources/scss/css/toggle.css">
+	<script src="../resources/js/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(".container > dl dt").on("click", function () {
+				$(".container > dl dd").slideUp();
+				// 1. css display: none; 방식
+				// if ($(this).next().css("display") == "none") {  
+
+				// 2. is(":visible") 방식 - 특정 엘리먼트의 display: none|block 여부를 판단할 수 있음 (jQuery 속성)
+				if ($(this).next().is(":visible") === false) {
+					$(this).next().slideDown();
+				} else {
+					$(".container > dl dd").slideUp();
+				};
+			});
+
+			$(".container2 > dl dt").on('click', function () {
+				$(this).next(".container2 > dl dd").slideToggle(500);
+			});
+
+			$(".container3 > dl dt button.btn").click(function () {
+				if (!$(this).closest("dt").hasClass("on")) {
+					$(".container3 > dl dt").removeClass("on");
+					$(this).closest("dt").addClass("on");
+					$(".container3 > dl dd").slideUp();
+					$(this).closest("dt").next().slideDown();
+					$(this).text("닫기")
+				} else {
+					$(".container3 > dl dt").removeClass("on");
+					$(".container3 > dl dd").slideUp();
+					$(this).text("열기")
+				}
+			})
+		});
+	</script>
+</head>
+
+<body>
+	<div class="conTitle">
+		<h1>아코디언 목록 구현하기</h1>
+	</div>
+	<div class="conBody">
+		<!-- 설명 -->
+		<!-- <div class="guide">
+			<h2 class="title">설명</h2>
+			<div class="textBox"></div>
+		</div> -->
+
+		<!-- 미리보기 -->
+		<div class="contentBox">
+			<!-- 콘텐츠 하나만 열리는 유형 -->
+			<div class="container">
+				<h2 class="title">콘텐츠 하나만 열리는 유형</h2>
+				<dl>
+					<dt class="toggleTit">제목</dt>
+					<dd class="toggleCon">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo quo perspiciatis facere
+						optio dolorum eos, repellat delectus ducimus repudiandae aliquid molestias saepe amet autem excepturi
+						voluptatem architecto? Sint, architecto voluptatum?</dd>
+					<dt class="toggleTit">제목</dt>
+					<dd class="toggleCon">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi ut quisquam tenetur
+						dignissimos, velit at vitae neque numquam optio, deleniti similique, unde laudantium officiis natus aperiam
+						adipisci perferendis explicabo veniam!</dd>
+				</dl>
+			</div>
+
+			<!-- 클릭한 모든 콘텐츠 열리는 유형 -->
+			<div class="container2">
+				<h2 class="title">클릭한 모든 콘텐츠 열리는 유형</h2>
+				<dl>
+					<dt class="toggleTit">제목</dt>
+					<dd class="toggleCon">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo quo perspiciatis facere
+						optio dolorum eos, repellat delectus ducimus repudiandae aliquid molestias saepe amet autem excepturi
+						voluptatem architecto? Sint, architecto voluptatum?</dd>
+					<dt class="toggleTit">제목</dt>
+					<dd class="toggleCon">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi ut quisquam tenetur
+						dignissimos, velit at vitae neque numquam optio, deleniti similique, unde laudantium officiis natus aperiam
+						adipisci perferendis explicabo veniam!</dd>
+				</dl>
+			</div>
+
+			<!-- 화살표 버튼 클릭 시 콘텐츠 열리는 유형 -->
+			<div class="container3">
+				<h2 class="title">화살표 버튼 클릭 시 콘텐츠 열리는 유형</h2>
+				<dl>
+					<dt class="toggleTit">제목<button class="btn">열기</button></dt>
+					<dd class="toggleCon">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo quo perspiciatis facere
+						optio dolorum eos, repellat delectus ducimus repudiandae aliquid molestias saepe amet autem excepturi
+						voluptatem architecto? Sint, architecto voluptatum?</dd>
+					<dt class="toggleTit">제목<button class="btn">열기</button></dt>
+					<dd class="toggleCon">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi ut quisquam tenetur
+						dignissimos, velit at vitae neque numquam optio, deleniti similique, unde laudantium officiis natus aperiam
+						adipisci perferendis explicabo veniam!</dd>
+					<dt class="toggleTit">제목<button class="btn">열기</button></dt>
+					<dd class="toggleCon">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi ut quisquam tenetur
+						dignissimos, velit at vitae neque numquam optio, deleniti similique, unde laudantium officiis natus aperiam
+						adipisci perferendis explicabo veniam!</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

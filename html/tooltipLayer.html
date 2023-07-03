@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>툴팁 레이어 구현하기</title>
+
+	<link rel="stylesheet" href="../resources/scss/css/popupLayers.css">
+	<script src="../resources/js/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('.tooltipBtnA').on('click', function () {
+				$(this).next('.tooltipA').show();
+			});
+			$('.closeBtn').on('click', function () {
+				$(this).parent('.tooltipA').hide();
+			});
+
+			$('[data-toggle-btn]').on('click', function () {
+				var btn = $(this);
+				var toggleContent = btn.data('toggle-btn');
+				var cont = $('[data-toggle-content=' + toggleContent + ']').attr('tabindex', '0');
+				cont.toggle();
+
+				if (cont.hasClass('tooltipB')) {
+					var contTop = btn.offset().top - 100;
+					cont.css('top', contTop);
+					cont.appendTo('.containerB').attr('tabindex', '0').focus();
+				};
+			});
+
+			$('.closeBtnB').on('click', function () {
+				var btnName = $(this).closest('[data-toggle-content]').data('toggle-content');
+				var btn = $('[data-toggle-btn=' + btnName + ']');
+				$(this).closest('[data-toggle-content]').toggle();
+				btn.focus();
+			});
+
+			// 접근성 포커싱 이전위치로
+			// $('.tooltipB .closeBtnB').on('click', function () {
+			// 	var tooltipB = $('.tooltipB').removeAttr('tabindex');
+			// 	$(tooltipB).hide();
+			// })
+
+			// 접근성 포커싱 유지 
+			$(document).on('keydown', '.closeBtnB', function (e) {
+				if (e.keyCode == 9 && !e.shiftKey) { // shift
+					e.preventDefault();
+					$(this).closest('.tooltipB').focus();
+
+				}
+			}).on('keydown', '.tooltipB', function (e) {
+				if ($('.tooltipB').is(e.target) && e.keyCode == 9 && e.shiftKey) { // shift + tab
+					e.preventDefault();
+					$(this).find('.closeBtnB').focus();
+				}
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<div class="conTitle">
+		<h1>툴팁 레이어 구현하기</h1>
+	</div>
+	<div class="conBody">
+		<!-- 설명 -->
+		<!-- <div class="guide">
+			<h2 class="title">설명</h2>
+			<div class="textBox"></div>
+		</div> -->
+
+		<!-- 미리보기 -->
+		<div class="contentBox">
+			<!-- 내가 작성해 본 방식 -->
+			<div>
+				<h3 class="subTitle">혼자 구현</h3>
+				<div class="examples">
+					<div class="containerA">
+						<span>콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 중간에 툴팁이 있을 경우에는</span>
+						<div class="tooltipWrap">
+							<a href="#;" class="tooltipBtnA">툴팁버튼A</a>
+							<div class="tooltipA">
+								<div class="tooltipBody"><span>tooltipA 입니다.</span></div>
+								<button type="button" class="closeBtn">X</button>
+							</div>
+						</div>
+						<span>이렇게 나오는군요. 콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 툴팁버튼영역을 클릭해보세요.</span>
+						<span>콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 중간에 툴팁이 있을 경우에는</span>
+						<div class="tooltipWrap">
+							<a href="#;" class="tooltipBtnA">툴팁버튼B</a>
+							<div class="tooltipA">
+								<div class="tooltipBody"><span>tooltipB 입니다.</span></div>
+								<button type="button" class="closeBtn">X</button>
+							</div>
+						</div>
+						<span>이렇게 나오는군요. 콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 툴팁버튼영역을 클릭해보세요.</span>
+						<span>콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 중간에 툴팁이 있을 경우에는</span>
+						<div class="tooltipWrap">
+							<a href="#;" class="tooltipBtnA">툴팁버튼C</a>
+							<div class="tooltipA">
+								<div class="tooltipBody"><span>tooltipC 입니다.</span></div>
+								<button type="button" class="closeBtn">X</button>
+							</div>
+						</div>
+						<span>이렇게 나오는군요. 콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 툴팁버튼영역을 클릭해보세요. 콘텐츠내용입니다. 여기에 콘텐츠가
+							들어갑니다. 중간에 툴팁이 있을 경우에는 이렇게 나오는군요.</span>
+					</div>
+				</div>
+			</div>
+			<!-- 우체국 가이드 참고 후 작성 -->
+			<div class="test">
+				<h3 class="subTitle">콘텐츠 토글 기능 활용</h3>
+				<div class="examples">
+					<div class="containerB">
+						<span>콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 중간에 툴팁이 있을 경우에는</span>
+						<a href="#;" class="tooltipBtnB" data-toggle-btn="tooltip1">툴팁버튼A</a>
+						<span>이렇게 나오는군요. 콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 툴팁버튼영역을 클릭해보세요.</span>
+						<span>콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 중간에 툴팁이 있을 경우에는</span>
+						<a href="#;" class="tooltipBtnB" data-toggle-btn="tooltip2">툴팁버튼B</a>
+						<span>이렇게 나오는군요. 콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 툴팁버튼영역을 클릭해보세요.</span>
+						<span>콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 중간에 툴팁이 있을 경우에는</span>
+						<a href="#;" class="tooltipBtnB" data-toggle-btn="tooltip3">툴팁버튼C</a>
+						<span>이렇게 나오는군요. 콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 툴팁버튼영역을 클릭해보세요.</span>
+						<span>콘텐츠내용입니다. 여기에 콘텐츠가 들어갑니다. 중간에 툴팁이 있을 경우에는 이렇게 나오는군요.</span>
+						<div class="tooltipB" data-toggle-content="tooltip1">
+							<div class="tooltipBody"><span>tooltipA 입니다.</span></div>
+							<button type="button" class="closeBtnB">X</button>
+						</div>
+						<div class="tooltipB" data-toggle-content="tooltip2">
+							<div class="tooltipBody"><span>tooltipB 입니다.</span></div>
+							<button type="button" class="closeBtnB">X</button>
+						</div>
+						<div class="tooltipB" data-toggle-content="tooltip3">
+							<div class="tooltipBody"><span>tooltipC 입니다.</span></div>
+							<button type="button" class="closeBtnB">X</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

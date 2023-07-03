@@ -1,0 +1,181 @@
+// 공통
+@import "../../scss/components/default.scss";
+
+.tab_menu {
+	white-space: nowrap;
+}
+
+.tab_menu1 {
+	position: relative;
+
+	.tab_list {
+		display: flex;
+		text-align: center;
+		line-height: 1.2;
+
+		li {
+			flex: 1 1 33.33%;
+			border: 1px solid #ddd;
+			background: #eee;
+
+			&:not(:last-child) {
+				border-right: none;
+			}
+		}
+
+		a {
+			display: block;
+
+			span {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 50px;
+				padding: 0 15px;
+				white-space: normal;
+				line-height: 1.2;
+				overflow: hidden;
+			}
+
+			&.on {
+				background: lightseagreen;
+
+				span {
+					font-weight: bold;
+					color: #eee;
+				}
+			}
+		}
+	}
+}
+
+.tab_menu2 {
+	position: relative;
+	width: 100%;
+	white-space: nowrap;
+
+	.tab_list {
+		display: flex;
+		justify-content: flex-start;
+		flex-wrap: nowrap;
+		width: 100%;
+		border-bottom: 1px solid #ddd;
+		text-align: center;
+		line-height: 1.2;
+		overflow-x: auto;
+
+		li {
+			min-width: 120px;
+			display: inline-block;
+			background: #fff;
+			white-space: nowrap;
+
+			&:not(:last-child) {
+				border-right: none;
+			}
+		}
+
+		a {
+			display: block;
+
+			span {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 50px;
+				padding: 0 15px;
+				white-space: normal;
+				line-height: 1.2;
+				overflow: hidden;
+			}
+
+			&.on {
+				border-bottom: 2px solid lightseagreen;
+
+				span {
+					font-weight: bold;
+					color: lightseagreen;
+				}
+			}
+		}
+	}
+}
+
+.tab_menu3 {
+	position: relative;
+
+	.tab_list {
+		display: flex;
+		flex-wrap: wrap;
+		text-align: center;
+		line-height: 1.2;
+
+		li {
+			width: 16.666%;
+			border: 1px solid #ddd;
+			background: #eee;
+
+			&:not(:nth-child(-n+6)) {
+				border-top: none;
+			}
+
+			&:not(:nth-child(6n)) {
+				border-right: none;
+			}
+
+			&:last-child {
+				border-right: 1px solid #ddd;
+			}
+		}
+
+		a {
+			display: block;
+
+			span {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 50px;
+				padding: 0 15px;
+				white-space: normal;
+				line-height: 1.2;
+				overflow: hidden;
+			}
+
+			&.on {
+				background: lightseagreen;
+
+				span {
+					font-weight: bold;
+					color: #eee;
+				}
+			}
+		}
+	}
+}
+
+.double_tab_container {
+	>.examples {
+		margin-top: 10px;
+
+		>.tab_menu {
+			&:not(:first-child) {
+				display: none;
+			}
+		}
+	}
+}
+
+.content_tab {
+	>.examples {
+		.content_box {
+			border: 1px solid #ddd;
+			border-top: none;
+			padding: 20px;
+
+			&:not(:first-child) {
+				display: none;
+			}
+		}
+	}
+}

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>메뉴 구현하기</title>
+
+	<link rel="stylesheet" href="../resources/scss/css/menu.css">
+	<script src="../resources/js/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			// 5dep, 4dep 공통
+			$('.allmenu-list li a').on('click', function() {
+				var clickOn = $(this);
+				var btnTg = clickOn.data('dep-tg');
+
+				if (!$(this).closest("li").hasClass("on")) {
+					clickOn.closest('li').siblings().removeClass('on');
+					clickOn.closest('li').addClass('on');
+					clickOn.closest('.click-case').find('.menu-wrap').hide();
+					clickOn.closest('.click-case').find('[data-dep-wrap=' + btnTg + ']').show();					
+					clickOn.closest('.mix-case').find('.menu-wrap').hide();
+					clickOn.closest('.mix-case').find('[data-dep-wrap=' + btnTg + ']').show();
+					clickOn.closest('.allmenu-list').next('.allmenu-body').show();
+				} else {
+					clickOn.closest('li').removeClass('on');
+					clickOn.closest('.allmenu-list').next('.allmenu-body').hide();
+				}
+			})			
+			$('.part-list li a').on('click', function() {
+				var clickOn2 = $(this);
+				var btnTg2 = clickOn2.data('dep-tg');			
+				clickOn2.closest('li').addClass('on').siblings().removeClass('on');
+				clickOn2.closest('.menu-wrap').find('.part-content').hide();
+				clickOn2.closest('.menu-wrap').find('[data-dep-wrap=' + btnTg2 + ']').show();
+			});
+			$(".content-4dep > li .sub_on").on('click', function () {
+				$(this).next(".content-5dep").slideToggle(300);
+			});
+
+			// 4dep 
+			$(".content-3dep > li .sub_on").on('click', function () {
+				$(this).next(".content-4dep").slideToggle(300);
+			});
+			$('.close-btn').on('click', function() {
+				$(this).closest('.allmenu-body').hide();
+			});
+
+			// hover 3dep
+			$('.hover-case').mouseover(function() {
+				$(this).find('.allmenu-body').stop(true,true).slideDown(400);
+			}).mouseleave(function() {
+				$(this).find('.allmenu-body').stop(true,true).slideUp(100);
+			});
+			$('.content-2dep li').mouseover(function() {
+				$(this).find('.content-3dep').stop().slideDown(400);
+			}).mouseleave(function() {
+				$(this).find('.content-3dep').stop().slideUp(100);
+			});
+
+			// click + hover mix 3dep
+			$('.mix-case .part-list li strong').mousemove(function() {
+				var mouseOn = $(this);
+				if (mouseOn.next('.content-3dep').mouseover && mouseOn.mouseover) {
+					$('.mix-case .part-list li .content-3dep').hide();
+					mouseOn.next('.content-3dep').show();
+				};
+
+				mouseOn.closest('.allmenu-body').mouseleave(function() {
+					$('.mix-case .part-list li .content-3dep').hide();
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<div class="conTitle">
+		<h1>메뉴 구현하기</h1>
+	</div>
+	<div class="conBody">
+		<!-- 설명 -->
+		<!-- <div class="guide">
+			<h2 class="title">설명</h2>
+			<div class="textBox"></div>
+		</div> -->
+
+		<!-- 미리보기 -->
+		<div class="contentBox">
+			<!-- <h2 class="title">미리보기</h2> -->
+
+			<div class="container">
+				<!-- 클릭 시 하위메뉴 노출 - case 1 : 시작 -->
+				<div class="item">
+					<h2 class="title">클릭 시 하위메뉴 노출 Case 1 (4Depth)</h2>
+					<div class="click-case click-case1">
+						<ul class="allmenu-list">
+							<li><a href="#;" data-dep-tg="dep_a_1_1">1Dep A</a></li>				
+							<li><a href="#;" data-dep-tg="dep_a_1_2">1Dep B</a></li>						
+							<li><a href="#;" data-dep-tg="dep_a_1_3">1Dep C</a></li>	
+						</ul>
+						<div class="allmenu-body">
+							<button type="button" class="close-btn">X<span class="sr-only">메뉴 닫기</span></button>
+							<div class="menu-wrap" data-dep-wrap="dep_a_1_1">
+								<h3 class="sr-only">1Dep A</h3>
+								1Dep A 입니다.
+							</div>
+							<div class="menu-wrap" data-dep-wrap="dep_a_1_2">
+								<h3 class="sr-only">1Dep B</h3>
+								<ul class="part-list">
+									<li data-dep-tg="dep_a_2_1">
+										<strong>2Dep A</strong>
+										<ul class="content-3dep">
+											<li><a href="#;">3Dep A</a></li>
+											<li><a href="#;">3Dep B</a></li>
+											<li>
+												<a href="#;" class="sub_on">3Dep C 하위메뉴 있음 클릭하시오</a>
+												<ul class="content-4dep">
+													<li><a href="#;">4Dep A</a></li>
+													<li><a href="#;">4Dep B</a></li>
+													<li><a href="#;">4Dep C</a></li>
+													<li><a href="#;">4Dep D</a></li>
+												</ul>
+											</li>
+											<li><a href="#;">3Dep D</a></li>
+										</ul>
+									</li>
+									<li data-dep-tg="dep_a_2_2">
+										<strong>2Dep B</strong>
+										<ul class="content-3dep">
+											<li>
+												<a href="#;" class="sub_on">3Dep A 하위메뉴 있음 클릭하시오</a>
+												<ul class="content-4dep">
+													<li><a href="#;">4Dep A</a></li>
+													<li><a href="#;">4Dep B</a></li>
+													<li><a href="#;">4Dep C</a></li>
+													<li><a href="#;">4Dep D</a></li>
+												</ul>
+											</li>
+											<li><a href="#;">3Dep B</a></li>
+											<li><a href="#;">3Dep C</a></li>
+											<li><a href="#;">3Dep D</a></li>
+										</ul>
+									</li>
+									<li data-dep-tg="dep_a_2_3">
+										<strong>2Dep C</strong>
+										<ul class="content-3dep">
+											<li><a href="#;">3Dep A</a></li>
+											<li><a href="#;">3Dep B</a></li>
+											<li><a href="#;">3Dep C</a></li>
+											<li><a href="#;">3Dep D</a></li>
+										</ul>
+									</li>
+									<li data-dep-tg="dep_a_2_4">
+										<strong>2Dep D</strong>
+										<ul class="content-3dep">
+											<li><a href="#;">3Dep A</a></li>
+											<li><a href="#;">3Dep B</a></li>
+											<li><a href="#;">3Dep C</a></li>
+											<li><a href="#;">3Dep D</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<div class="menu-wrap" data-dep-wrap="dep_a_1_3">
+								<h3 class="sr-only">1Dep C</h3>
+								1Dep C 입니다.
+							</div>
+						</div>
+					</div>
+				</div>				
+				<!-- 클릭 시 하위메뉴 노출 - case 1 : 끝 -->
+
+				<!-- 클릭 시 하위메뉴 노출 - case 2 : 시작 -->
+				<div class="item">
+					<h2 class="title">클릭 시 하위메뉴 노출 Case 2 (5Depth)</h2>
+					<div class="click-case click-case2">
+						<ul class="allmenu-list">
+							<li class="on"><a href="#;" data-dep-tg="dep_b_1_1">1Dep A</a></li>						
+							<li><a href="#;" data-dep-tg="dep_b_1_2">1Dep B</a></li>						
+							<li><a href="#;" data-dep-tg="dep_b_1_3">1Dep C</a></li>	
+						</ul>
+						<div class="allmenu-body">
+							<div class="menu-wrap" data-dep-wrap="dep_b_1_1">
+								<h3 class="sr-only">1Dep A</h3>
+								<ul class="part-list">
+									<li class="on"><a href="#;" data-dep-tg="dep_b_2_1">2Dep A</a></li>
+									<li><a href="#;" data-dep-tg="dep_b_2_2">2Dep B</a></li>
+									<li><a href="#;" data-dep-tg="dep_b_2_3">2Dep C</a></li>
+									<li><a href="#;" data-dep-tg="dep_b_2_4">2Dep D</a></li>
+								</ul>
+								<div class="part-container">
+									<div class="part-content" data-dep-wrap="dep_b_2_1">
+										<h4 class="sr-only">2Dep A</h4>
+										<ul class="content-3dep">
+											<li class="on">
+												<a href="#;">3Dep A</a>
+												<ul class="content-4dep">
+													<li>
+														<a href="#;" class="sub_on">4Dep A 하위메뉴 있음 클릭하시오</a>
+														<ul class="content-5dep">
+															<li><a href="#;">5Dep A</a></li>
+															<li><a href="#;">5Dep B</a></li>
+															<li><a href="#;">5Dep C</a></li>
+														</ul>
+													</li>
+													<li><a href="#;">4Dep B</a></li>
+													<li><a href="#;">4Dep C</a></li>
+													<li><a href="#;">4Dep D</a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="#;">3Dep B</a>
+												<ul class="content-4dep">
+													<li><a href="#;">4Dep A</a></li>
+													<li><a href="#;">4Dep B</a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="#;">3Dep C 텍스트 길어지면 이렇게</a>
+												<ul class="content-4dep">
+													<li><a href="#;">4Dep A</a></li>
+													<li><a href="#;">4Dep B</a></li>
+													<li><a href="#;">4Dep C</a></li>
+													<li><a href="#;">4Dep D텍스트 길어지면 이렇게</a></li>
+													<li><a href="#;">4Dep E</a></li>
+												</ul>
+											</li>
+										</ul>
+									</div>
+									<div class="part-content" data-dep-wrap="dep_b_2_2">
+										<h4 class="sr-only">2Dep B</h4>
+										<ul class="content-3dep">
+											<li class="on"><a href="#;">3Dep A</a>2Dep B 입니다</li>
+											<li><a href="#;">3Dep B</a></li>
+											<li><a href="#;">3Dep C</a></li>
+										</ul>
+									</div>
+									<div class="part-content" data-dep-wrap="dep_b_2_3">
+										<h4 class="sr-only">2Dep C</h4>
+										<ul class="content-3dep">
+											<li class="on"><a href="#;">3Dep A</a>2Dep C 입니다</li>
+											<li><a href="#;">3Dep B</a></li>
+											<li><a href="#;">3Dep C</a></li>
+										</ul>
+									</div>
+									<div class="part-content" data-dep-wrap="dep_b_2_4">
+										<h4 class="sr-only">2Dep D</h4>
+										<ul class="content-3dep">
+											<li class="on"><a href="#;">3Dep A</a>2Dep D 입니다</li>
+											<li><a href="#;">3Dep B</a></li>
+											<li><a href="#;">3Dep C</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>						
+							<div class="menu-wrap" data-dep-wrap="dep_b_1_2">
+								<h3 class="sr-only">1Dep B</h3>
+								1Dep B 입니다.
+							</div>
+							<div class="menu-wrap" data-dep-wrap="dep_b_1_3">
+								<h3 class="sr-only">1Dep C</h3>
+								1Dep C 입니다.
+							</div>
+						</div>
+					</div>
+				</div>				
+				<!-- 클릭 시 하위메뉴 노출 - case 2 : 끝 -->
+				
+				<!-- 호버 시 하위메뉴 노출 - case 1 : 시작 -->
+				<div class="item">
+					<h2 class="title">호버 시 하위메뉴 노출 case 1 (3Depth)</h2>
+					<div class="hover-case hover-case1">
+						<ul class="allmenu-list">
+							<li>1Dep A</li>						
+							<li>1Dep B</li>
+							<li>1Dep C</li>	
+							<li>1Dep D</li>	
+						</ul>
+						<div class="allmenu-body">
+							<div class="menu-wrap">
+								<ul class="part-list">
+									<li>
+										<strong>2Dep A</strong>
+										<ul class="content-3dep">
+											<li><a href="#;">3Dep A</a></li>
+											<li><a href="#;">3Dep B</a></li>
+											<li><a href="#;">3Dep C</a></li>
+											<li><a href="#;">3Dep D</a></li>
+										</ul>
+									</li>
+									<li>
+										<strong>2Dep B</strong>
+										<ul class="content-3dep">
+											<li><a href="#;">3Dep A</a></li>
+											<li><a href="#;">3Dep B</a></li>
+											<li><a href="#;">3Dep C</a></li>
+											<li><a href="#;">3Dep D</a></li>
+										</ul>
+									</li>
+									<li>
+										<strong>2Dep C</strong>
+										<ul class="content-3dep">
+											<li><a href="#;">3Dep A</a></li>
+											<li><a href="#;">3Dep B</a></li>
+											<li><a href="#;">3Dep C</a></li>
+											<li><a href="#;">3Dep D</a></li>
+										</ul>
+									</li>
+									<li>
+										<strong>2Dep D</strong>
+										<ul class="content-3dep">
+											<li><a href="#;">3Dep A</a></li>
+											<li><a href="#;">3Dep B</a></li>
+											<li><a href="#;">3Dep C</a></li>
+											<li><a href="#;">3Dep D</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>				
+				<!-- 호버 시 하위메뉴 노출 - case 1 : 끝 -->
+
+				<!-- 호버 시 하위메뉴 노출 - case 2 : 시작 -->
+				<div class="item">
+					<h2 class="title">호버 시 하위메뉴 노출 Case 2 (3Depth)</h2>
+					<div class="hover-case hover-case2">
+						<ul class="allmenu-list">
+							<li>1Dep A</li>						
+							<li>1Dep B</li>
+							<li>1Dep C</li>	
+							<li>1Dep D</li>	
+						</ul>
+						<div class="allmenu-body">
+							<div class="menu-wrap">
+								<ul class="part-list">
+									<li>
+										<ul class="content-2dep">
+											<li><a href="#;">2Dep A</a></li>
+											<li><a href="#;">2Dep B</a></li>
+											<li><a href="#;">2Dep C</a></li>
+											<li><a href="#;">2Dep D</a></li>
+										</ul>
+									</li>
+									<li>
+										<ul class="content-2dep">
+											<li><a href="#;">2Dep A</a></li>
+											<li><a href="#;">2Dep B</a></li>
+											<li>
+												<a href="#;">2Dep C 하위메뉴 있음</a>
+												<ul class="content-3dep">
+													<li><a href="#">3Dep A</a></li>
+													<li><a href="#">3Dep B</a></li>
+													<li><a href="#">3Dep C</a></li>
+												</ul>
+											</li>
+											<li><a href="#;">2Dep D</a></li>
+										</ul>
+									</li>
+									<li>
+										<ul class="content-2dep">
+											<li>
+												<a href="#;">2Dep A 하위메뉴 있음</a>
+												<ul class="content-3dep">
+													<li><a href="#">3Dep A</a></li>
+													<li><a href="#">3Dep B</a></li>
+													<li><a href="#">3Dep C</a></li>
+												</ul>
+											</li>
+											<li><a href="#;">2Dep B</a></li>
+											<li><a href="#;">2Dep C</a></li>
+											<li><a href="#;">2Dep D</a></li>
+										</ul>
+									</li>
+									<li>
+										<ul class="content-2dep">
+											<li><a href="#;">2Dep A</a></li>
+											<li><a href="#;">2Dep B</a></li>
+											<li><a href="#;">2Dep C</a></li>
+											<li><a href="#;">2Dep D</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>				
+				<!-- 호버 시 하위메뉴 노출 - case 2 : 끝 -->
+
+				<!-- 클릭 + 호버 시 하위메뉴 노출 : 시작 -->
+				<div class="item">
+					<h2 class="title">클릭 + 호버 시 하위메뉴 노출 (3Depth)</h2>
+					<div class="mix-case">
+						<ul class="allmenu-list">
+							<li><a href="#;" data-dep-tg="dep_e_1_1">1Dep A</a></li>						
+							<li><a href="#;" data-dep-tg="dep_e_1_2">1Dep B</a></li>
+							<li><a href="#;" data-dep-tg="dep_e_1_3">1Dep C</a></li>
+						</ul>
+						<div class="allmenu-body">
+							<div class="menu-wrap" data-dep-wrap="dep_e_1_1">
+								<h3 class="sr-only">1Dep A</h3>
+								1Dep A 입니다.
+							</div>
+							<div class="menu-wrap" data-dep-wrap="dep_e_1_2">
+								<h3 class="sr-only">1Dep B</h3>
+								<ul class="part-list">
+									<li>
+										<strong>2Dep A</strong>
+										<ul class="content-3dep">
+											<li><a href="#;">3Dep A</a></li>
+											<li><a href="#;">3Dep B</a></li>
+											<li><a href="#;">3Dep C</a></li>
+											<li><a href="#;">3Dep D</a></li>
+											<li><a href="#;">3Dep E</a></li>
+											<li><a href="#;">3Dep F</a></li>
+										</ul>
+									</li>
+									<li>
+										<strong>2Dep B</strong>
+										<ul class="content-3dep">
+											<li>2Dep B 입니다.</li>
+										</ul>
+									</li>
+									<li>
+										<strong>2Dep C</strong>
+										<ul class="content-3dep">
+											<li>2Dep C 입니다.</li>
+										</ul>
+									</li>
+									<li>
+										<strong>2Dep D</strong>
+										<ul class="content-3dep">
+											<li><a href="#;">3Dep A</a></li>
+											<li><a href="#;">3Dep B</a></li>
+											<li><a href="#;">3Dep C</a></li>
+											<li><a href="#;">3Dep D</a></li>
+											<li><a href="#;">3Dep E</a></li>
+											<li><a href="#;">3Dep F</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<div class="menu-wrap" data-dep-wrap="dep_e_1_3">
+								<h3 class="sr-only">1Dep C</h3>
+								1Dep C 입니다.
+							</div>
+						</div>
+					</div>
+				</div>				
+				<!-- 클릭 + 호버 시 하위메뉴 노출 : 끝 -->
+			</div>
+			
+		</div>
+	</div>
+</body>
+
+</html>

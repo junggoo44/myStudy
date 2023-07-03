@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>탭메뉴 구현하기</title>
+
+	<link rel="stylesheet" href="../resources/scss/css/tabMeun.css">
+	<script src="../resources/js/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(".tab_menu li a").on("click", function(e) {
+				e.preventDefault();
+				var tabIndex = $(this).closest(".tab_menu");
+				$(tabIndex).find("a").removeClass("on").removeAttr('title');
+				$(this).addClass("on").attr('title', '선택됨');
+			});
+
+			$('.double_tab_container > .tab_menu1 .tab_list a').on('click', function () {
+				var obj = $(this);
+				var tg = obj.data('tab-tg');
+				obj.addClass('on').attr('title', '선택됨').parent().siblings().find('>a').removeClass().removeAttr('title');
+				// siblings() = 선택한 요소의 모든 형제요소를 반환
+				$('[data-sub-tab]').hide();
+				$('[data-sub-tab=' + tg + ']').show();
+			});
+
+			$('.content_tab > .tab_menu1 .tab_list a').on('click', function () {
+				var tab = $(this);
+				var tabTg = tab.data('con-tg');
+				tab.addClass('on').attr('title', '선택됨').parent().siblings().find('>a').removeClass().removeAttr('title');
+				$('[data-content]').hide();
+				$('[data-content=' + tabTg + ']').show();
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<div class="conTitle">
+		<h1>탭메뉴 구현하기</h1>
+	</div>
+	<div class="conBody">
+		<!-- 설명 -->
+		<!-- <div class="guide">
+			<h2 class="title">설명</h2>
+			<div class="textBox"></div>
+		</div> -->
+
+		<!-- 미리보기 -->
+		<div class="contentBox">
+			<!-- <h2 class="title">미리보기</h2> -->
+
+			<div class="container">
+				<!-- 컨텐츠 상단의 탭 -->
+				<h2 class="title">한 줄 고정 type1</h2>
+				<nav class="tab_menu tab_menu1">
+					<ul class="tab_list">
+						<li><a href="#;" title="선택됨" class="on"><span>탭 메뉴명1</span></a></li>
+						<li><a href="#;"><span>탭 메뉴명2</span></a></li>
+						<li><a href="#;"><span>탭 메뉴명3 탭 메뉴명이 길어질 경우 두줄로 넘어간다. 탭 메뉴명이 길어질 경우 두줄로 넘어간다.</span></a></li>
+					</ul>
+				</nav>
+				
+				<h2 class="title">한 줄 고정 type2</h2>
+				<nav class="tab_menu tab_menu2">
+					<ul class="tab_list">
+						<li><a href="#;" title="선택됨" class="on"><span>탭 메뉴명1</span></a></li>
+						<li><a href="#;"><span>탭 메뉴명2</span></a></li>
+						<li><a href="#;"><span>탭 메뉴명3</span></a></li>
+						<li><a href="#;"><span>탭 메뉴명4 메뉴명이 길어지면 이렇게 된다</span></a></li>
+					</ul>
+				</nav>
+
+				<!-- 두 줄 탭 (width값 고정) -->
+				<h2 class="title">한 줄에 6개 고정 탭 / 개수 늘어날 경우 다음 줄로 넘어 감</h2>
+				<nav class="tab_menu tab_menu3">
+					<ul class="tab_list">
+						<li><a href="#;" title="선택됨" class="on"><span>탭 메뉴명1</span></a></li>
+						<li><a href="#;"><span>탭 메뉴명2</span></a></li>
+						<li><a href="#;"><span>탭 메뉴명3</span></a></li>
+						<li><a href="#;"><span>탭 메뉴명4</span></a></li>
+						<li><a href="#;"><span>탭 메뉴명5</span></a></li>
+						<li><a href="#;"><span>탭 메뉴명6</span></a></li>
+						<li><a href="#;"><span>탭 메뉴명7</span></a></li>
+						<li><a href="#;"><span>탭 메뉴명8</span></a></li>
+						<li><a href="#;"><span>탭 메뉴명9</span></a></li>
+						<li><a href="#;"><span>탭 메뉴명10</span></a></li>
+					</ul>
+				</nav>
+
+				<!-- 더블 탭 -->
+				<h2 class="title">더블 탭</h2>
+				<div class="double_tab_container">
+					<nav class="tab_menu tab_menu1">
+						<ul class="tab_list">
+							<li><a href="#;" title="선택됨" data-tab-tg="sub_tab1" class="on"><span>탭 메뉴명1</span></a></li>
+							<li><a href="#;" data-tab-tg="sub_tab2"><span>탭 메뉴명2</span></a></li>
+							<li><a href="#;" data-tab-tg="sub_tab3"><span>탭 메뉴명3</span></a></li>
+						</ul>
+					</nav>
+					<div class="examples">
+						<div class="tab_menu tab_menu3" data-sub-tab="sub_tab1">
+							<ul class="tab_list">
+								<li><a href="#;" title="선택됨" class="on"><span>서브 탭1</span></a></li>
+								<li><a href="#;"><span>서브 탭1</span></a></li>
+								<li><a href="#;"><span>서브 탭1</span></a></li>
+								<li><a href="#;"><span>서브 탭1</span></a></li>
+								<li><a href="#;"><span>서브 탭1</span></a></li>
+								<li><a href="#;"><span>서브 탭1</span></a></li>
+								<li><a href="#;"><span>서브 탭1</span></a></li>
+								<li><a href="#;"><span>서브 탭1</span></a></li>
+								<li><a href="#;"><span>서브 탭1</span></a></li>
+								<li><a href="#;"><span>서브 탭1</span></a></li>
+								<li><a href="#;"><span>서브 탭1</span></a></li>
+								<li><a href="#;"><span>서브 탭1</span></a></li>
+							</ul>
+						</div>
+						<div class="tab_menu tab_menu3" data-sub-tab="sub_tab2">
+							<ul class="tab_list">
+								<li><a href="#;" title="선택됨"><span>서브 탭2</span></a></li>
+								<li><a href="#;"><span>서브 탭2</span></a></li>
+								<li><a href="#;"><span>서브 탭2</span></a></li>
+								<li><a href="#;"><span>서브 탭2</span></a></li>
+								<li><a href="#;"><span>서브 탭2</span></a></li>
+								<li><a href="#;" class="on"><span>서브 탭2</span></a></li>
+								<li><a href="#;"><span>서브 탭2</span></a></li>
+								<li><a href="#;"><span>서브 탭2</span></a></li>
+								<li><a href="#;"><span>서브 탭2</span></a></li>
+								<li><a href="#;"><span>서브 탭2</span></a></li>
+								<li><a href="#;"><span>서브 탭2</span></a></li>
+								<li><a href="#;"><span>서브 탭2</span></a></li>
+							</ul>
+						</div>
+						<div class="tab_menu tab_menu3" data-sub-tab="sub_tab3">
+							<ul class="tab_list">
+								<li><a href="#;" title="선택됨"><span>서브 탭3</span></a></li>
+								<li><a href="#;"><span>서브 탭3</span></a></li>
+								<li><a href="#;"><span>서브 탭3</span></a></li>
+								<li><a href="#;" class="on"><span>서브 탭3</span></a></li>
+								<li><a href="#;"><span>서브 탭3</span></a></li>
+								<li><a href="#;"><span>서브 탭3</span></a></li>
+								<li><a href="#;"><span>서브 탭3</span></a></li>
+								<li><a href="#;"><span>서브 탭3</span></a></li>
+								<li><a href="#;"><span>서브 탭3</span></a></li>
+								<li><a href="#;"><span>서브 탭3</span></a></li>
+								<li><a href="#;"><span>서브 탭3</span></a></li>
+								<li><a href="#;"><span>서브 탭3</span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- 페이지 유형 탭 -->
+				<h2 class="title">페이지 유형 탭</h2>
+				<div class="content_tab">
+					<nav class="tab_menu tab_menu1">
+						<ul class="tab_list">
+							<li><a href="#;" title="선택됨" data-con-tg="content1" class="on"><span>탭 메뉴명1</span></a></li>
+							<li><a href="#;" data-con-tg="content2"><span>탭 메뉴명2</span></a></li>
+							<li><a href="#;" data-con-tg="content3"><span>탭 메뉴명3</span></a></li>
+						</ul>
+					</nav>
+					<div class="examples">
+						<div data-content="content1" class="content_box">
+							컨텐츠 1
+						</div>
+						<div data-content="content2" class="content_box">
+							컨텐츠 2
+						</div>
+						<div data-content="content3" class="content_box">
+							컨텐츠 3
+						</div>
+					</div>					
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</body>
+
+</html>

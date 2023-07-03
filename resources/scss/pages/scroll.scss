@@ -1,0 +1,97 @@
+// 공통
+@import "../../scss/components/default.scss";
+
+// 스크롤이벤트
+.contentBox {
+	.btnContainer {
+		display: flex;
+		height: 40px;
+
+		span {
+			display: flex;
+			flex: 1 1 auto;
+			height: 100%;
+			border: 1px solid #ddd;
+
+			&:not(:last-child) {
+				border-right: none
+			}
+
+			a {
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				line-height: 40px;
+				font-weight: bold;
+			}
+		}
+	}
+}
+
+.container {
+	display: flex;
+
+	div {
+		width: 500px;
+		margin-right: 20px;
+
+		.scrollWrap {
+			width: 100%;
+			height: 700px;
+			border: 1px solid #ddd;
+			overflow-y: auto;
+			scroll-behavior: smooth;
+
+			.con {
+				height: 700px;
+				text-align: center;
+				line-height: 700px;
+				font-weight: bold;
+				font-size: 50px;
+
+				&.con1 {
+					background: red;
+				}
+
+				&.con2 {
+					background: yellow;
+				}
+
+				&.con3 {
+					background: blue;
+				}
+			}
+
+			&.scrollWrap2 {
+				.con {
+					position: relative;
+					top: 0;
+
+					&.con1 {
+						&.on {
+							background-image: url(../../image/content/bg1.jpg);
+							background-size: cover;
+							background-position: bottom center;
+						}
+					}
+
+					&.con2 {
+						&.on {
+							background-image: url(../../image/content/bg2.jpg);
+							background-size: cover;
+							background-position: bottom center;
+						}
+					}
+
+					&.con3 {
+						&.on {
+							background-image: url(../../image/content/bg3.jpg);
+							background-size: cover;
+							background-position: bottom center;
+						}
+					}
+				}
+			}
+		}
+	}
+}

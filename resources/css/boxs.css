@@ -1,0 +1,21 @@
+.testBox {
+  background: lightblue;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.testBox .test {
+  color: black;
+  margin: 20px auto;
+  font-size: 50px;
+  text-align: center;
+}
+
+.linkBtn {
+  text-decoration: none;
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: yellowgreen;
+  color: white;
+}

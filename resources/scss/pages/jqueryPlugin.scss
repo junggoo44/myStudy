@@ -1,0 +1,51 @@
+// 공통
+@import "../../scss/components/default.scss";
+
+// swiper infinite loop
+.swiperContentBox {
+	.container {
+		position: relative;
+		max-width: 500px;
+		height: 700px;
+		border: 1px solid #eee;
+
+		.swiper {
+			width: 100%;
+			height: 100%;
+
+			.swiper-slide {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				&.bg1 {
+					background: lightgray;
+				}
+
+				&.bg2 {
+					background: lightcoral;
+				}
+
+				&.bg3 {
+					background: lightgoldenrodyellow;
+				}
+			}
+
+			.swiper-button-next,
+			.swiper-button-prev {
+				background: none;
+				color: black;
+			}
+
+			.swiper-pagination {
+				background: none;
+
+				.swiper-pagination-bullet {
+					background: black;
+					width: 10px;
+					height: 10px;
+				}
+			}
+		}
+	}
+}

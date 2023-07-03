@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  color: black;
+  vertical-align: baseline;
+}
+
+body {
+  min-width: 600px;
+}
+
+body .conTitle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  min-width: 500px;
+  padding: 5px;
+  background: #fff;
+}
+
+body .conTitle .linkBtn {
+  display: inline-block;
+  margin-right: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: #313131;
+  color: white;
+}
+
+body .conBody {
+  position: relative;
+  top: 55px;
+  left: 0;
+  padding: 0 10px 10px;
+}
+
+body .conBody .title {
+  margin: 20px 0 5px;
+  font-size: 20px;
+}
+
+body .conBody .subTitle {
+  margin: 20px 0 5px;
+  font-size: 18px;
+}
+
+body .conBody .guide .textBox {
+  height: 200px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: lightgoldenrodyellow;
+  padding: 20px;
+}
+
+.contentBox .btnContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 40px;
+}
+
+.contentBox .btnContainer span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  height: 100%;
+  border: 1px solid #ddd;
+}
+
+.contentBox .btnContainer span:not(:last-child) {
+  border-right: none;
+}
+
+.contentBox .btnContainer span a {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.container div {
+  width: 500px;
+  margin-right: 20px;
+}
+
+.container div .scrollWrap {
+  width: 100%;
+  height: 700px;
+  border: 1px solid #ddd;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.container div .scrollWrap .con {
+  height: 700px;
+  text-align: center;
+  line-height: 700px;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.container div .scrollWrap .con.con1 {
+  background: red;
+}
+
+.container div .scrollWrap .con.con2 {
+  background: yellow;
+}
+
+.container div .scrollWrap .con.con3 {
+  background: blue;
+}
+
+.container div .scrollWrap.scrollWrap2 .con {
+  position: relative;
+  top: 0;
+}
+
+.container div .scrollWrap.scrollWrap2 .con.con1.on {
+  background-image: url(../../image/content/bg1.jpg);
+  background-size: cover;
+  background-position: bottom center;
+}
+
+.container div .scrollWrap.scrollWrap2 .con.con2.on {
+  background-image: url(../../image/content/bg2.jpg);
+  background-size: cover;
+  background-position: bottom center;
+}
+
+.container div .scrollWrap.scrollWrap2 .con.con3.on {
+  background-image: url(../../image/content/bg3.jpg);
+  background-size: cover;
+  background-position: bottom center;
+}

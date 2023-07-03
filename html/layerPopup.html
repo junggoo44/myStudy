@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>레이어 팝업 구현하기</title>
+
+	<link rel="stylesheet" href="../resources/scss/css/popupLayers.css">
+	<script src="../resources/js/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('.popOpen').on('click', function () {
+				var btn = $(this);
+				var popupOn = btn.data('popup-btn');
+				var cont = $('[data-popup=' + popupOn + ']');
+				if(cont.toggle()){
+					$(cont).find('.popupCon').attr('tabindex', '0').focus();
+				}
+			});
+
+			$('.close').on('click', function () {
+				var btnClose = $(this);
+				var pop = btnClose.closest('[data-popup]');
+				var popupOff = pop.data('popup');
+				var popOpenBtn = $('[data-popup-btn=' + popupOff + ']');
+
+				if(pop.toggle()){
+					$(popOpenBtn).attr('tabindex', '0').focus();
+				};
+			});
+
+			$(document).on('keydown', '.popupCon > button.close', function (e) {
+				if (e.keyCode == 9 && !e.shiftKey) { 
+					e.preventDefault();
+					$(this).closest('.popupCon').attr('tabindex', '0').focus();
+				};				
+			}).on('keydown', '.popupCon', function (e) {
+				if ($(this).is(e.target) && e.keyCode == 9 && e.shiftKey) { 
+					e.preventDefault();
+					$(this).find('.close').focus();					
+				}
+			});			
+		});
+	</script>
+</head>
+
+<body>
+	<div class="conTitle">
+		<h1>레이어 팝업 구현하기</h1>
+	</div>
+	<div class="conBody p_0">
+		<!-- 설명 -->
+		<!-- <div class="guide">
+			<h2 class="title">설명</h2>
+			<div class="textBox"></div>
+		</div> -->
+
+		<!-- 미리보기 -->
+		<div class="backContent">
+			<button type="button" class="popOpen" data-popup-btn="layerSample1">레이어 팝업1</button>
+			<button type="button" class="popOpen" data-popup-btn="layerSample2">레이어 팝업2</button>
+		</div>
+		<div class="layerPopup hide" data-popup="layerSample1">
+			<div class="dimed"></div>
+			<div class="popupInner">
+
+				<!-- 레이어 컨텐츠 : s -->
+				<div class="popupCon">
+					<div class="popupHeader">
+						<h2 class="popupTit">타이틀 영역</h2>
+					</div>
+			
+					<div class="popupBody">
+						<div class="container">컨텐츠 영역</div>
+					</div>
+			
+					<div class="popupFooter">
+						<div class="btnGroupFlex">
+							<button type="button" class="btn bgGray close">취소</button>
+							<button type="button" class="btn bgBlue">확인</button>
+						</div>
+					</div>
+					<button type="button" class="close closeBtn">X<span class="srOnly">닫기</span></button>
+				</div>
+				<!-- 레이어 컨텐츠 : e -->
+			
+			</div>
+		</div>
+		<div class="layerPopup hide" data-popup="layerSample2">
+			<div class="dimed"></div>
+			<div class="popupInner">
+
+				<!-- 레이어 컨텐츠 : s -->
+				<div class="popupCon">
+					<div class="popupHeader">
+						<h2 class="popupTit">타이틀 영역22222</h2>
+					</div>
+			
+					<div class="popupBody">
+						<div class="container">컨텐츠 영역222222</div>
+					</div>
+			
+					<div class="popupFooter">
+						<div class="btnGroupFlex">
+							<button type="button" class="btn bgGray close">취소</button>
+							<button type="button" class="btn bgBlue">확인</button>
+						</div>
+					</div>
+					<button type="button" class="close closeBtn">X<span class="srOnly">닫기</span></button>
+				</div>
+				<!-- 레이어 컨텐츠 : e -->
+			
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
